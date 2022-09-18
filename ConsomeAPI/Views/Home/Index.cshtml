@@ -1,0 +1,122 @@
+﻿
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (ViewBag.listaColunas == null)
+    {
+        ViewBag.listaColunas = new string[] { "id", "Nome", "Habilitado" };
+    }
+}
+
+<script type="module" src="../scripts/app.js"></script> 
+
+<div id="message"></div>
+<div>
+    Compiler: <input id="compiler" value="TypeScript"  /><br /> @*onkeyup="document.getElementById('message').innerText = sayHello()"*@
+    Framework: <input id="framework" value="ASP.NET" onkeyup="document.getElementById('message').innerText = sayHello()" />
+</div>
+
+<input type="submit" id="teste" onclick="abrirmodal(1)" value="teste" class="pesquisa"/>
+
+
+<input type="submit" id="search" value="Search" class='pesquisa'/>  @*onclick="mostrarnatela()"*@
+<input type="submit" id="searchTeste" value="SearchTeste" class="pesquisa"/>
+<br />
+<input type="submit" id="base" value="ConverterZip" class="pesquisa" />
+
+<br /><br />
+
+<div class="panel-body table-responsive">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    TESTE
+                </div>
+                <div class="card-body">
+                    <table id="tblTeste" class="table row-border order-column small">
+                        <thead>
+                            <tr class="alert-info">
+                                @{
+                                    foreach (var item in ViewBag.listaColunas)
+                                    {
+                                            <th>@item</th>
+                                    }
+                                }
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    EXEMPLO HEADER
+                </div>
+                <div class="card-body">
+                    <table id="table_id" class="table hover">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Nome</th>
+                                <th>Habilitado</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+*@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-sm-12">
+
+                  <input type="hidden" id="txtidPersona" />
+                  <div class="form-group">
+                      <label for="txtid">id</label>
+                      <input type="text" class="form-control" id="txtid" />
+                  </div>
+                  <div class="form-group">
+                      <label for="txtNome">Nome</label>
+                      <input type="text" class="form-control" id="txtNome" />
+                  </div>
+                  <div class="form-group">
+                      <label for="txtHabilitado">Habilitado</label>
+                      <input type="text" class="form-control" id="txtHabilitado" />
+                  </div>
+
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+

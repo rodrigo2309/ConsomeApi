@@ -1,0 +1,44 @@
+﻿@*<script type="text/javascript" src="site.js"></script>*@
+@model List<Personagem>
+
+<style>
+   .container2 {
+        display:grid;
+        grid-template-columns: repeat(auto-fit,minmax(200px, 100px));
+        justify-content: center;
+        gap: 50px;
+        padding: 10px;
+   }
+
+   p {
+      max-width: 25ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+    #imagem{
+        border-radius:10px;
+    }
+</style>
+
+<main>
+    <div class="option">
+        <form asp-action="Character">
+            <input type="text" placeholder="3-D Man" value="3-D Man" name='nome' class='nome' id='n' />@*Digita o herói*@            
+            <input type="submit" value="Search" class='pesquisa'/>
+            <a asp-action ='Character' asp-route-id="3-D Man" >Character</a>
+        </form>
+    </div>
+    <div class="container2">
+        @foreach (var item in @Model)
+        {
+            <div>
+                <h2>@item.id</h2>
+                <p>@item.Description</p>
+                <p><a href="@item.URlWiki">@item.Nome</a></p>
+                <img src='@item.URlImagem' height='200' width='200' id='imagem' />             
+            </div>
+        }
+    </div>
+</main>

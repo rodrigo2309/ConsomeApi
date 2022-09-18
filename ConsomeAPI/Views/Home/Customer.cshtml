@@ -1,0 +1,69 @@
+﻿@model List<Customer>
+
+
+
+<main>
+    <div class="container2">
+        @foreach (var item in @Model)
+        {
+            <div>
+                <p>Id : @item.Id</p>
+                <p>Nome : @item.Name</p>
+                <p>Habilitado : @item.Enable</p>
+            </div>
+        }
+    </div>
+</main>
+
+@*@{
+    Layout = null;
+}*@
+
+@{
+    if (ViewBag.listaColunas == null)
+    {
+        ViewBag.listaColunas = new string[] { "ID", "Nome", "Enable"};
+    }
+    ViewBag.Teste = "teste";
+}
+
+<div class="panel panel-default panel-primary">
+    <div class="panel-heading">Operadoras</div>
+    <div class="panel-body table-responsive" id="pnlCarrierList_PartialWapCarrierList">
+        <table id="tblCarrierList_PartialWapCarrierList" class="table row-border order-column small">
+            <thead>
+                <tr class="alert-info">
+                    @{
+                        foreach (var item in @ViewBag.listaColunas) 
+                        {
+                            <th>@item</th>
+                        }
+                        @ViewBag.Teste;
+                        @ViewData["Teste"];
+                    }                    
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary" id="btnNewCarrier_PartialWapCarrierList">
+                    @*@Labels.global_register*@
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@section scripts{
+    <script>
+        $(document).ready(function () {
+            SystemJS.import('/Scripts/views/Home/Customer/Customer.js').then(function (component) {
+                new component.Sending(_static);
+            });
+        });
+    </script>
+}*@
