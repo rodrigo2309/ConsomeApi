@@ -3,15 +3,14 @@ export class app {
     mostrarnatela() {
         alert("acabou");
     }
-    inicio(nomeTabela) {
+    LoadTable(nomeTabela) {
         $("#" + nomeTabela).DataTable().clear();
         $("#" + nomeTabela).DataTable().destroy();
-        this.AjaxPost(this.GetColumnsDataTableDefinition(), nomeTabela);
-    }
-    inicioTeste(nomeTabela) {
-        $('#' + nomeTabela).DataTable().clear();
-        $("#" + nomeTabela).DataTable().destroy();
-        this.AjaxPostTeste(this.GetColumnsDataTableDefinitionNew(), nomeTabela);
+        let table = this.GetColumnsDataTableDefinition();
+        if (nomeTabela == "tblNoApi") {
+            table = this.GetColumnsDataTableDefinitionNew();
+        }
+        this.AjaxPost(table, nomeTabela);
     }
     ConverteZip() {
         $.ajax({
@@ -21,34 +20,28 @@ export class app {
         });
     }
     AjaxPost(tabela, nomeTabela) {
+        let url = "Home/CustomerWithAPI";
+        if (nomeTabela == "tblNoApi") {
+            url = "Home/UserWithoutApi";
+        }
         $.ajax({
-            url: "Home/Customer",
+            url: url,
             contentType: 'application/json',
             success: (foi) => {
                 this.OnSuccessRequest(foi, tabela, nomeTabela);
             },
         });
     }
-    AjaxPostTeste(tabela, nomeTabela) {
-        $.ajax({
-            url: "Home/Teste",
-            contentType: 'application/json',
-            success: (foi) => {
-                this.OnSuccessRequestTeste(foi, tabela, nomeTabela);
-            },
-        });
-    }
     OnSuccessRequest(success, tabela, nomeTabela) {
-        $("#" + nomeTabela).DataTable({
-            data: success.data,
-            columns: tabela
-        });
-    }
-    OnSuccessRequestTeste(success, tabela, nomeTabela) {
-        $("#" + nomeTabela).DataTable({
-            data: success.data,
-            columns: tabela
-        });
+        if (success == "404") {
+            alert("Api desligada");
+        }
+        else {
+            $("#" + nomeTabela).DataTable({
+                data: success.data,
+                columns: tabela
+            });
+        }
     }
     GetColumnsDataTableDefinition() {
         return [
@@ -75,9 +68,15 @@ export class app {
             }
         ];
     }
-    abrirmodal($idPersona) {
-        alert($idPersona);
+    abrirmodal($idPersona, evento) {
+        this.Evento = evento;
+        $("#tblNoApi").DataTable().clear();
+        $("#tblNoApi").DataTable().destroy();
         $("#exampleModal").modal("show");
+    }
+    fecharmodal($idPersona) {
+        $("#exampleModal").modal("hide");
+        this.Evento();
     }
     eliminar($idPersona) {
         alert("eliminar:" + $idPersona);

@@ -1,22 +1,23 @@
 export const name = "rodrigo";
 
 export class app {
+    private Evento: any;
+
     mostrarnatela() {
         alert("acabou");
     }
 
-    public inicio(nomeTabela:any) {
+    public LoadTable(nomeTabela:any) {
         $("#" + nomeTabela).DataTable().clear();
         $("#" + nomeTabela).DataTable().destroy();
 
-        this.AjaxPost(this.GetColumnsDataTableDefinition(), nomeTabela); 
-    }
+        let table = this.GetColumnsDataTableDefinition();
 
-    public inicioTeste(nomeTabela: any) {
-        $('#' + nomeTabela).DataTable().clear();
-        $("#" + nomeTabela).DataTable().destroy();
+        if (nomeTabela == "tblNoApi") {
+            table = this.GetColumnsDataTableDefinitionNew();
+        }
 
-        this.AjaxPostTeste(this.GetColumnsDataTableDefinitionNew(), nomeTabela);
+        this.AjaxPost(table, nomeTabela); 
     }
 
     public ConverteZip() {
@@ -28,8 +29,14 @@ export class app {
     }
 
     private AjaxPost(tabela: any, nomeTabela: any) {
+        let url = "Home/CustomerWithAPI";
+
+        if (nomeTabela == "tblNoApi") {
+            url = "Home/UserWithoutApi";
+        }
+
         $.ajax({
-            url: "Home/Customer",
+            url: url,
             contentType: 'application/json',
             success: (foi) => {
                 this.OnSuccessRequest(foi, tabela, nomeTabela);
@@ -37,28 +44,16 @@ export class app {
         });
     }
 
-    private AjaxPostTeste(tabela: any, nomeTabela: any) {
-        $.ajax({
-            url: "Home/Teste",
-            contentType: 'application/json',
-            success: (foi) => {
-                this.OnSuccessRequestTeste(foi, tabela, nomeTabela);
-            },
-        });
-    }
-
     private OnSuccessRequest(success?: any, tabela?: any, nomeTabela?: any): any {
-        $("#" + nomeTabela).DataTable({
-            data: success.data,
-            columns: tabela
-        });
-    }
+        if (success == "404") {
+            alert("Api desligada");
+        } else {
+            $("#" + nomeTabela).DataTable({
+                data: success.data,
+                columns: tabela
+            });
+        }
 
-    private OnSuccessRequestTeste(success?: any, tabela?: any, nomeTabela?: any): any {
-        $("#" + nomeTabela).DataTable({
-            data: success.data,
-            columns: tabela
-        });
     }
 
     protected GetColumnsDataTableDefinition(): any[] {
@@ -90,10 +85,16 @@ export class app {
         ];
     }
 
-    public abrirmodal($idPersona: any) {
-        
-        alert($idPersona)
+    public abrirmodal($idPersona: any,evento: any) {
+        this.Evento = evento;
+        $("#tblNoApi").DataTable().clear();
+        $("#tblNoApi").DataTable().destroy();
         $("#exampleModal").modal("show");
+    }
+
+    public fecharmodal($idPersona: any) {
+        $("#exampleModal").modal("hide");
+        this.Evento();
     }
 
     public eliminar($idPersona: any) {

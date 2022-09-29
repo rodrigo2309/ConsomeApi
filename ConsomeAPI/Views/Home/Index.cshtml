@@ -12,17 +12,17 @@
 
 <div id="message"></div>
 <div>
-    Compiler: <input id="compiler" value="TypeScript"  /><br /> @*onkeyup="document.getElementById('message').innerText = sayHello()"*@
+    Compiler: <input id="compiler" value="TypeScript"  /><br /> 
     Framework: <input id="framework" value="ASP.NET" onkeyup="document.getElementById('message').innerText = sayHello()" />
 </div>
 
-<input type="submit" id="teste" onclick="abrirmodal(1)" value="teste" class="pesquisa"/>
+<input type="submit" id="chamaModal" value="Chamar Modal" class="pesquisa"/>
 
+<input type="submit" id="toChargeCharacterWithAPI" value="Carrega Personagem Com API" class='pesquisa'/> 
 
-<input type="submit" id="search" value="Search" class='pesquisa'/>  @*onclick="mostrarnatela()"*@
-<input type="submit" id="searchTeste" value="SearchTeste" class="pesquisa"/>
+<input type="submit" id="toChargeTableUserWithoutAPI" value="Carrega Tabela Usuarios Sem API" class="pesquisa"/>
 <br />
-<input type="submit" id="base" value="ConverterZip" class="pesquisa" />
+<input type="submit" id="compressDescompress" value="Comprimi Descompri Zip" class="pesquisa" />
 
 <br /><br />
 
@@ -31,10 +31,10 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    TESTE
+                    PERSONAGENS VIA API
                 </div>
                 <div class="card-body">
-                    <table id="tblTeste" class="table row-border order-column small">
+                    <table id="tblApi" class="table row-border order-column small">
                         <thead>
                             <tr class="alert-info">
                                 @{
@@ -58,10 +58,10 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    EXEMPLO HEADER
+                    USUARIOS SEM API
                 </div>
                 <div class="card-body">
-                    <table id="table_id" class="table hover">
+                    <table id="tblNoApi" class="table hover">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -113,7 +113,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="closeToChargeTbl" class="btn btn-secondary" data-dismiss="modal">Fechar e Carregar Tabela Por Evento</button>
         <button type="button" class="btn btn-primary">Send message</button>
       </div>
     </div>

@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<QueriesService>();
+builder.Services.AddScoped<ConverteZipService>();
 
 var app = builder.Build();
 

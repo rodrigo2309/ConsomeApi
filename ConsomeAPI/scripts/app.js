@@ -1,14 +1,14 @@
 import { app } from "./create.js";
 let create = new app();
-$("#search").click(() => {
-    create.inicio("tblTeste");
+$("#toChargeCharacterWithAPI").click(() => {
+    create.LoadTable("tblApi");
     console.log("clicado");
 });
-$("#searchTeste").click(() => {
-    create.inicioTeste("table_id");
+$("#toChargeTableUserWithoutAPI").click(() => {
+    create.LoadTable("tblNoApi");
     console.log("clicado");
 });
-$("#base").click(() => {
+$("#compressDescompress").click(() => {
     create.ConverteZip();
     console.log("converteZip");
 });
@@ -16,19 +16,24 @@ $("#base").click(() => {
 //    teste.inicio("table_id");
 //    teste.inicioTeste("tblTeste");
 //});
-$("#table_id" + ' tbody').on('click', '.sendWapPush', (event) => {
-    //t.ExecuteCampaignSubmitActionToUrl('sending/SendWapPush', event);
+$("#tblNoApi" + ' tbody').on('click', '.sendWapPush', (event) => {
     let submitItemSelected = null;
     let tr = $(event.currentTarget).closest('tr');
-    let row = $("#table_id").DataTable().row(tr);
-    submitItemSelected = $("#table_id").DataTable().row(row).data();
-    create.abrirmodal(submitItemSelected.id);
+    let row = $("#tblNoApi").DataTable().row(tr);
+    submitItemSelected = $("#tblNoApi").DataTable().row(row).data();
+    create.abrirmodal(submitItemSelected.id, null);
 });
-$("#compiler").keyup(() => {
-    create.abrirmodal(1);
+//$("#compiler").keyup(() => {
+//    //create.abrirmodal(1);
+//});
+$("#chamaModal").click(() => {
+    let evento = () => {
+        create.LoadTable("tblNoApi");
+    };
+    create.abrirmodal(1, evento);
 });
-$("#abrir").click(() => {
-    create.abrirmodal(1);
+$("#closeToChargeTbl").click(() => {
+    create.fecharmodal(1);
 });
 function sayHello() {
     const compiler = document.getElementById("compiler")
